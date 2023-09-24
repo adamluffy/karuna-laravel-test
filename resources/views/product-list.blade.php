@@ -2,12 +2,9 @@
 
 @section("title", "Product List")
 
-@section("head")
-    @vite('resources/js/modal.js')
-@endsection
 
 @section("content")
-    
+
     <div class="d-flex">
         <div class="p-4">
             <h1>Laravel</h1>
@@ -46,14 +43,19 @@
                     <td>
                         <a type="button" class="btn btn-info" href="{{ url("product/$product->id") }}">Show</a>
                         <a type="button" class="btn btn-primary"  href="{{ url("product/$product->id/edit") }}">Edit</a>
-                        <a type="button" class="btn btn-danger">Delete</a>
+                        <button type="button"class="btn btn-danger"
+                            data-bs-toggle="modal"
+                            data-bs-target="#deleteModal"
+                            data-bs-product-id="{{ $product->id }}"
+                            data-bs-product-name="{{ $product->name }}"
+                        >Delete</a>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
 
-    <div class="modal-dialog ">
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
 
@@ -75,4 +77,6 @@
 
         </div>
     </div>
+
+    @vite('resources/ts/product/delete-product.ts')
 @endsection
